@@ -26,12 +26,14 @@ import { HomeModule } from '../home.module';
 import { DashboardBoxComponent } from './dashboard-box/dashboard-box.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { CrudApiDosComponent } from './crud-api-dos/crud-api-dos.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    DashboardBoxComponent
+    DashboardBoxComponent,
+    CrudApiDosComponent
   ],
     imports: [
         CommonModule,

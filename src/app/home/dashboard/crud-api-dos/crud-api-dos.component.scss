@@ -1,0 +1,32 @@
+.dashboard-wraper {
+    height: 11vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 11);
+    width: 100%;
+    padding: 0;
+    background-image: linear-gradient(-90deg, #000024, #00234e);
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.55);
+  }
+
+.header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: calc(100% - 13vw);
+    height: 100%;
+    z-index: 10;
+    font-size: 18px;
+    color: white;
+    vertical-align: middle;
+  }
+  
+  .header img {
+    height: 26px;
+    margin: 0 10px;
+  }
+
+  @media (max-width: 700px) {
+    .header {
+      display: none;
+    }
+  }
