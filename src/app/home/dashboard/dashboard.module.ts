@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FormControlDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +28,7 @@ import { DashboardBoxComponent } from './dashboard-box/dashboard-box.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CrudApiDosComponent } from './crud-api-dos/crud-api-dos.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -60,7 +62,9 @@ import { CrudApiDosComponent } from './crud-api-dos/crud-api-dos.component';
         MatTableModule,
         MatSortModule,
         NgxLoadingModule,
-        MatChipsModule
+        MatChipsModule,
+        HttpClientModule,
+        MatPaginatorModule
     ]
 })
 export class DashboardModule { }

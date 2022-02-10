@@ -6,45 +6,55 @@
   
       </div>
     </div>
-    <!-- Showing dashboard with information -->
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-      
-      <!-- Position Column -->
-      <ng-container matColumnDef="mal_id">
-        <th mat-header-cell *matHeaderCellDef> id </th>
-        <td mat-cell *matCellDef="let element"> {{element.mal_id}} </td>
-      </ng-container>
-    
-      <!-- Position Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> title </th>
-        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-      </ng-container>
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="score">
-        <th mat-header-cell *matHeaderCellDef> score </th>
-        <td mat-cell *matCellDef="let element"> {{element.score}} </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="episodes">
-        <th mat-header-cell *matHeaderCellDef> episodes </th>
-        <td mat-cell *matCellDef="let element"> {{element.episodes}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-    </mat-paginator>
-    
+    <div>
+      <mat-card>
+        <div class="example-container mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" class="example-table"
+          matSort matSortActive="mal_id" matSortDisableClear matSortDirection="desc">
+        
+            <!--  Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> id </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <!--  Column -->
+            <ng-container matColumnDef="canonicalTitle">
+              <th mat-header-cell *matHeaderCellDef> title </th>
+              <td mat-cell *matCellDef="let element"> {{element.attributes.canonicalTitle}} </td>
+            </ng-container>
+        
+            <!--  Column -->
+            <ng-container matColumnDef="averageRating">
+              <th mat-header-cell *matHeaderCellDef> score </th>
+              <td mat-cell *matCellDef="let element"> {{element.attributes.averageRating}} </td>
+            </ng-container>
+        
+            <!--  Column -->
+            <ng-container matColumnDef="episodeCount">
+              <th mat-header-cell *matHeaderCellDef> episodes </th>
+              <td mat-cell *matCellDef="let element"> {{element.attributes.episodeCount}} </td>
+            </ng-container>
+
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>    
+          <mat-paginator 
+              [length]="total"               
+              [pageSize]="limit"
+              [pageSizeOptions]="[5, 10, 15, 20]"
+              (page)="OnPageActivated($event)">
+                         <!-- aria-label="Select page of periodic elements"> -->
+          </mat-paginator>
+        </div>
+      </mat-card>
+    </div>
+
+    <footer>algo de prueba</footer>
+  
+            
     
 </div>
   
