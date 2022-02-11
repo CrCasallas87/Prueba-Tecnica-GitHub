@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort, SortDirection} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CrudApiSService } from 'src/app/services/crud-api-s.service';
 @Component({
@@ -11,9 +11,12 @@ import { CrudApiSService } from 'src/app/services/crud-api-s.service';
 
 export class CrudApiDosComponent implements OnInit {
   
-  displayedColumns: string[] = ['id', 'canonicalTitle', 'averageRating', 'episodeCount']; 
-  dataSource = new MatTableDataSource<any>([]);   
-  limit: any = 20;
+  displayedColumns: string[] = ['id', 'canonicalTitle', 'averageRating', 'episodeCount', 'agregar']; 
+  dataSource = new MatTableDataSource<any>([]);
+  info:any={};
+  infoAlmacenada:any={}
+  InfoListaPersonalTotal:any[]=[]
+  limit: any = 10;
   offset: any = 0;
   total: any;
 
@@ -23,23 +26,16 @@ export class CrudApiDosComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(public crudApiService: CrudApiSService) {
-     
-   }
+  constructor(public crudApiService: CrudApiSService, public dialog: MatDialog) {}
+
   ngOnInit(): void {
      this.crudApiService.datosApi(this.limit, this.offset).subscribe(resp =>{      
        console.log(resp);
        this.dataSource=resp.data;
+       this.dataSource                 
        console.log(this.dataSource);
        this.total=resp.meta.count;
-       console.log(this.total);
-      //  if (resp.pagination.last_visible_page>0){
-      //    
-      //    this.sort.active,
-      //    this.sort.direction,
-      //    this.paginator.pageIndex;
-      //    this.resultsLength = resp.pagination.last_visible_page;      
-      //  }      
+       console.log(this.total);          
      })
   }
 
@@ -52,7 +48,32 @@ export class CrudApiDosComponent implements OnInit {
     this.crudApiService.datosApi(this.limit,this.offset).subscribe(resp=>{
       this.dataSource=resp.data;
       this.total=resp.meta.count;
-    })
-    
+    })    
+  }
+
+  seleccionar(ide:number){
+    this.crudApiService.datosApiUni(ide)
+    .subscribe((resp:any)=>{
+      this.info= resp;      
+      if (typeof(Storage)!=='undefined'){      
+        localStorage.setItem("infou", JSON.stringify(this.info));
+        this.infoAlmacenada=JSON.parse(localStorage.getItem("infou"));        
+        const infoListaPersonal:any ={
+          id:this.infoAlmacenada.data.id,
+          canonicalTitle:this.infoAlmacenada.data.attributes.canonicalTitle,
+          averageRating:this.infoAlmacenada.data.attributes.averageRating,
+          episodeCount:this.infoAlmacenada.data.attributes.episodeCount
+        }
+        this.crudApiService.agregarALista(infoListaPersonal);
+        // console.log(infoListaPersonal);
+        this.InfoListaPersonalTotal.push(infoListaPersonal);
+        // console.log(this.InfoListaPersonalTotal);
+        this.crudApiService.disparador.emit({
+          data:this.InfoListaPersonalTotal
+        })   
+      }else{
+        alert("storage no es compatible en este navegador")
+      }    
+    })     
   }
 }

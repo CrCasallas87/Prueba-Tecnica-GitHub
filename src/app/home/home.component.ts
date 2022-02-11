@@ -38,7 +38,9 @@ export class HomeComponent implements OnInit {
    */
   public initSidebar(){
     this.menusList.push({icono: "Dashboard@PYP.png", nombre: "Crud API", ruta: '/home/crudapidos'},
-                        {icono: "Dashboard@PYP.png", nombre: "Dashboard", ruta: '/home/dashboard'});
+                        {icono: "Dashboard@PYP.png", nombre: "Lista Personal", ruta: '/home/listap'},
+                        {icono: "Dashboard@PYP.png", nombre: "Dashboard", ruta: '/home/dashboard'}
+                        );
   }
 
   public async logout() {

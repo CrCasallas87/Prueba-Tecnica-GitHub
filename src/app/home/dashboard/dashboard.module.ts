@@ -29,13 +29,22 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CrudApiDosComponent } from './crud-api-dos/crud-api-dos.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalApiComponent } from './modal-api/modal-api.component';
+import { ListaPersonalComponent } from './lista-personal/lista-personal.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardBoxComponent,
-    CrudApiDosComponent
+    CrudApiDosComponent,
+    ModalApiComponent,
+    ListaPersonalComponent
+  ],
+
+  entryComponents: [
+    ModalApiComponent
   ],
     imports: [
         CommonModule,
@@ -64,7 +73,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         NgxLoadingModule,
         MatChipsModule,
         HttpClientModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule
     ]
 })
 export class DashboardModule { }
