@@ -14,8 +14,7 @@ export class CrudApiDosComponent implements OnInit {
   displayedColumns: string[] = ['id', 'canonicalTitle', 'averageRating', 'episodeCount', 'agregar']; 
   dataSource = new MatTableDataSource<any>([]);
   info:any={};
-  infoAlmacenada:any={}
-  InfoListaPersonalTotal:any[]=[]
+  infoAlmacenada:any={}  
   limit: any = 10;
   offset: any = 0;
   total: any;
@@ -30,12 +29,12 @@ export class CrudApiDosComponent implements OnInit {
 
   ngOnInit(): void {
      this.crudApiService.datosApi(this.limit, this.offset).subscribe(resp =>{      
-       console.log(resp);
+      //  console.log(resp);
        this.dataSource=resp.data;
        this.dataSource                 
-       console.log(this.dataSource);
+      //  console.log(this.dataSource);
        this.total=resp.meta.count;
-       console.log(this.total);          
+      //  console.log(this.total);          
      })
   }
 
@@ -65,12 +64,7 @@ export class CrudApiDosComponent implements OnInit {
           episodeCount:this.infoAlmacenada.data.attributes.episodeCount
         }
         this.crudApiService.agregarALista(infoListaPersonal);
-        // console.log(infoListaPersonal);
-        this.InfoListaPersonalTotal.push(infoListaPersonal);
-        // console.log(this.InfoListaPersonalTotal);
-        this.crudApiService.disparador.emit({
-          data:this.InfoListaPersonalTotal
-        })   
+        // console.log(infoListaPersonal);        
       }else{
         alert("storage no es compatible en este navegador")
       }    

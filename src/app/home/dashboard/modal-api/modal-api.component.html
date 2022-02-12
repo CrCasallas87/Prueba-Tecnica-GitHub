@@ -1,7 +1,23 @@
 <div>
-    <h1 mat-dialog-title>Dialog with elements</h1>
-    <div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+  <form (ngSubmit)="aceptar(lista.idel)" [formGroup]="formulario">
+    <p mat-dialog-title>Formulario para editar</p>
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>titulo</mat-label>
+        <input matInput name="(lista.canonicalTitle" [(ngModel)]="lista.canonicalTitle" formControlName="lista.canonicalTitle">        
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>rating</mat-label>
+        <input matInput name="(lista.averageRating" [(ngModel)]="lista.averageRating" formControlName="lista.averageRating">        
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>no. episodios</mat-label>
+        <input matInput name="(lista.episodeCount" [(ngModel)]="lista.episodeCount" formControlName="lista.episodeCount">        
+      </mat-form-field>
+    </div>
     <div mat-dialog-actions>
       <button mat-button mat-dialog-close>Close</button>
+      <button type="submit" mat-button>aceptar</button>
     </div>
+  </form>
 </div>
