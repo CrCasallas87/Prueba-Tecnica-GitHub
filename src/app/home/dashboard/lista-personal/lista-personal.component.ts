@@ -43,8 +43,7 @@ export class ListaPersonalComponent implements OnInit {
         res.push(person);
       })
       return res;            
-    }));
-    // console.log(this.myCart$);    
+    }));     
   }
 
   OnPageActivated(event:any){

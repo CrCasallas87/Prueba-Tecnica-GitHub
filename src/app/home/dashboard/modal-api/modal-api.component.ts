@@ -18,7 +18,7 @@ export class ModalApiComponent implements OnInit {
   })
 
   constructor(private fb: FormBuilder, public crudApiService: CrudApiSService) { 
-    this.aceptar(this.idel);
+    this.editar(this.idel);
   }
 
   info:any={};
@@ -44,18 +44,28 @@ export class ModalApiComponent implements OnInit {
     }));    
   }
 
-  aceptar(idel:number){
+  editar(idel:number){
     this.crudApiService.myLU$.subscribe( resp =>{
-      this.listaunidad=resp; 
-      //  console.log(this.listaunidad);     
+      this.listaunidad=resp;           
       const listado:any = {
+        id: this.listaunidad.id,
+        idel: this.listaunidad.idel,
         canonicalTitle: this.listaunidad.canonicalTitle,
         averageRating: this.listaunidad.averageRating,
         episodeCount: this.listaunidad.episodeCount
-      }
-      console.log(listado);
-      this.info=listado;
-      console.log(this.info.canonicalTitle);
+      }      
+      this.info=listado;      
    }) 
+  }
+
+  guardarLista(i:number, id:number){    
+    const personaje:any = {
+      id:id,
+      idel:i,
+      canonicalTitle: this.formulario.value.canonicalTitle,
+      averageRating: this.formulario.value.averageRating,
+      episodeCount: this.formulario.value.episodeCount
+    }
+    this.crudApiService.guardarLista(i, personaje);
   }
 }

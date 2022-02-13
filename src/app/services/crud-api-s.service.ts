@@ -33,7 +33,7 @@ export class CrudApiSService {
   eliminarDeLista(i:number){
     delete this.myList[i];
     this.myList.splice(i,1);    
-    this.myCart.next(this.myList);           
+    this.myCart.next(this.myList);       
   }
 
   verlista(i:number){            
@@ -46,6 +46,12 @@ export class CrudApiSService {
     }
     this.listaUnidadS=listaUnidad;
     this.myLU.next(this.listaUnidadS);
+  }
+
+  guardarLista (i:number, personaje:any){
+    this.myList.splice(i,1,personaje);
+    console.log(this.myList);
+    this.myCart.next(this.myList); 
   }
 
 

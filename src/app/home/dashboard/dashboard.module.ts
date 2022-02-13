@@ -74,7 +74,8 @@ import { ListaPersonalComponent } from './lista-personal/lista-personal.componen
         MatChipsModule,
         HttpClientModule,
         MatPaginatorModule,
-        MatDialogModule
+        MatDialogModule,
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl:'never'})
     ]
 })
 export class DashboardModule { }

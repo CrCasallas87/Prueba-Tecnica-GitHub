@@ -1,5 +1,5 @@
 <div>
-  <form (ngSubmit)="aceptar(info.idel)" [formGroup]="formulario">
+  <form (ngSubmit)="guardarLista(info.idel, info.id)" [formGroup]="formulario">
     <p mat-dialog-title>Formulario para editar</p>
     <div mat-dialog-content>
       <mat-form-field appearance="fill">
@@ -15,9 +15,8 @@
         <input matInput name="info.episodeCount" [(ngModel)]="info.episodeCount" formControlName="episodeCount">        
       </mat-form-field>
     </div>
-    <div mat-dialog-actions>
-      <button mat-button mat-dialog-close>Close</button>
-      <button type="submit" mat-button>aceptar</button>
+    <div mat-dialog-actions>      
+      <button type="submit" mat-button mat-dialog-close>aceptar</button>
     </div>
   </form>
 </div>
