@@ -1,18 +1,18 @@
 <div>
-  <form (ngSubmit)="aceptar(lista.idel)" [formGroup]="formulario">
+  <form (ngSubmit)="aceptar(info.idel)" [formGroup]="formulario">
     <p mat-dialog-title>Formulario para editar</p>
     <div mat-dialog-content>
       <mat-form-field appearance="fill">
         <mat-label>titulo</mat-label>
-        <input matInput name="(lista.canonicalTitle" [(ngModel)]="lista.canonicalTitle" formControlName="lista.canonicalTitle">        
+        <input matInput name="info.canonicalTitle" [(ngModel)]="info.canonicalTitle" formControlName="canonicalTitle">        
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>rating</mat-label>
-        <input matInput name="(lista.averageRating" [(ngModel)]="lista.averageRating" formControlName="lista.averageRating">        
+        <input matInput name="info.averageRating" [(ngModel)]="info.averageRating" formControlName="averageRating">        
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>no. episodios</mat-label>
-        <input matInput name="(lista.episodeCount" [(ngModel)]="lista.episodeCount" formControlName="lista.episodeCount">        
+        <input matInput name="info.episodeCount" [(ngModel)]="info.episodeCount" formControlName="episodeCount">        
       </mat-form-field>
     </div>
     <div mat-dialog-actions>

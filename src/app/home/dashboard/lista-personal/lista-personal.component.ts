@@ -16,9 +16,11 @@ export class ListaPersonalComponent implements OnInit {
   displayedColumns: string[] = ['id', 'canonicalTitle', 'averageRating', 'episodeCount', 'editar', 'eliminar']; 
   dataSource = new MatTableDataSource<any>([]);  
   info:any={};
+  listaunidad:any ={};
   limit: any = 10;
   offset: any = 0;
   total: any;
+  myCart$:Observable<any>;  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;  
 
@@ -26,12 +28,7 @@ export class ListaPersonalComponent implements OnInit {
     // this.dataSource.paginator = this.paginator;
   }
 
-  constructor(public crudApiService: CrudApiSService, public dialog: MatDialog) {
-    
-   }
-  myCart$:Observable<any>;
-  listaunidad:any ={};
-  
+  constructor(public crudApiService: CrudApiSService, public dialog: MatDialog) {} 
 
   ngOnInit(): void {    
     this.obtenerPersonaje();
@@ -47,15 +44,13 @@ export class ListaPersonalComponent implements OnInit {
       })
       return res;            
     }));
-    console.log(this.myCart$);    
+    // console.log(this.myCart$);    
   }
 
   OnPageActivated(event:any){
     this.limit=event.pageSize;
     this.offset=(Number(event.pageIndex))* Number(event.pageSize);
-
     console.log('limit',this.limit,'offset',this.offset);
-
     this.crudApiService.datosApi(this.limit,this.offset).subscribe(resp=>{
       this.dataSource=resp.data;
       this.total=resp.meta.count;
@@ -63,18 +58,8 @@ export class ListaPersonalComponent implements OnInit {
   }
 
   openDialog(idel:number) {
-    // this.dialog.open(ModalApiComponent);
-    this.crudApiService.verlista(idel)
-    this.myCart$.subscribe(resp =>{
-      this.listaunidad=resp;
-      console.log(this.listaunidad);
-      const listado:any = {
-        canonicalTitle: this.listaunidad[idel].canonicalTitle,
-        averageRating: this.listaunidad[idel].averageRating,
-        episodeCount: this.listaunidad[idel].episodeCount
-      }
-      console.log(listado);
-    })
+    this.dialog.open(ModalApiComponent); 
+    this.crudApiService.verlista(idel)      
   }
 
   eliminarDeLalista(i:number){

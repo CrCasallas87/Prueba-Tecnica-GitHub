@@ -6,11 +6,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CrudApiSService {
 
+  url = 'https://kitsu.io/api/edge/anime';
+  
   myList: any[] = [];
   myCart = new BehaviorSubject<any[]>([]);
   myCart$ = this.myCart.asObservable();  
-  url = 'https://kitsu.io/api/edge/anime';
-  listaUnidadS:any={}  
+    
+  listaUnidadS:any={}
+  myLU = new BehaviorSubject<any>({});
+  myLU$ = this.myLU.asObservable();    
 
   constructor(private http: HttpClient) { }
 
@@ -29,17 +33,19 @@ export class CrudApiSService {
   eliminarDeLista(i:number){
     delete this.myList[i];
     this.myList.splice(i,1);    
-    this.myCart.next(this.myList);    
-    console.log(i);    
+    this.myCart.next(this.myList);           
   }
 
   verlista(i:number){            
     const listaUnidad: any ={
+      id: this.myList[i].id,
+      idel: this.myList[i].idel,
       canonicalTitle: this.myList[i].canonicalTitle,
       averageRating: this.myList[i].averageRating,
       episodeCount: this.myList[i].episodeCount
     }
-    this.myCart.next(this.myList);
+    this.listaUnidadS=listaUnidad;
+    this.myLU.next(this.listaUnidadS);
   }
 
 

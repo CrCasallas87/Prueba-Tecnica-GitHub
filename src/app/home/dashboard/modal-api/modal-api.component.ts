@@ -17,16 +17,19 @@ export class ModalApiComponent implements OnInit {
     episodeCount: ['', [Validators.required]],
   })
 
-  constructor(private fb: FormBuilder, public crudApiService: CrudApiSService) { }
+  constructor(private fb: FormBuilder, public crudApiService: CrudApiSService) { 
+    this.aceptar(this.idel);
+  }
 
+  info:any={};
+  listaunidad:any ={};
+  myLU$:Observable<any>;
   myCart$:Observable<any>;
   lista:any=[]
   idel:any={};
 
-  
-
   ngOnInit(): void {    
-    this.obtenerPersonaje();
+    // this.obtenerPersonaje();   
   }
 
   obtenerPersonaje(){
@@ -41,7 +44,18 @@ export class ModalApiComponent implements OnInit {
     }));    
   }
 
-  aceptar(){
-    
+  aceptar(idel:number){
+    this.crudApiService.myLU$.subscribe( resp =>{
+      this.listaunidad=resp; 
+      //  console.log(this.listaunidad);     
+      const listado:any = {
+        canonicalTitle: this.listaunidad.canonicalTitle,
+        averageRating: this.listaunidad.averageRating,
+        episodeCount: this.listaunidad.episodeCount
+      }
+      console.log(listado);
+      this.info=listado;
+      console.log(this.info.canonicalTitle);
+   }) 
   }
 }
