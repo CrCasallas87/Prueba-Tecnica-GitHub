@@ -41,7 +41,7 @@
             <ng-container matColumnDef="agregar">
               <th mat-header-cell *matHeaderCellDef> agregar </th>
               <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button (click)="seleccionar(element.id)" color="accent">Agregar</button>  
+                <button mat-button (click)="seleccionar(element.id)">Agregar</button>  
               </td>
             </ng-container>          
             
@@ -54,6 +54,7 @@
           <mat-paginator 
               [length]="total"               
               [pageSize]="limit"
+              showFirstLastButtons
               [pageSizeOptions]="[5, 10, 15, 20]"
               (page)="OnPageActivated($event)">              
           </mat-paginator>

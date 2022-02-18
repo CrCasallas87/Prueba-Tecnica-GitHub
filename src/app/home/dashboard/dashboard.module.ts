@@ -22,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NgxLoadingModule } from 'ngx-loading';
 import { HomeModule } from '../home.module';
 import { DashboardBoxComponent } from './dashboard-box/dashboard-box.component';
@@ -62,6 +63,7 @@ import { ListaPersonalComponent } from './lista-personal/lista-personal.componen
         MatStepperModule,
         ReactiveFormsModule,
         MatSlideToggleModule,
+        MatButtonToggleModule,
         MatFormFieldModule,
         HomeModule,
         MatDatepickerModule,

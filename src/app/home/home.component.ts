@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   public async logout() {
+    localStorage.removeItem('token');
     this.toast.success("Sesión cerrada exitosamente");
     this.router.navigateByUrl("/");
   }

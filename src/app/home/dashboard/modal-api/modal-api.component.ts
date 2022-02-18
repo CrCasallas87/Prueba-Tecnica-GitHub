@@ -24,8 +24,7 @@ export class ModalApiComponent implements OnInit {
   info:any={};
   listaunidad:any ={};
   myLU$:Observable<any>;
-  myCart$:Observable<any>;
-  lista:any=[]
+  myCart$:Observable<any>;  
   idel:any={};
 
   ngOnInit(): void {    
@@ -60,12 +59,13 @@ export class ModalApiComponent implements OnInit {
 
   guardarLista(i:number, id:number){    
     const personaje:any = {
-      id:id,
+      id:id, 
       idel:i,
       canonicalTitle: this.formulario.value.canonicalTitle,
       averageRating: this.formulario.value.averageRating,
       episodeCount: this.formulario.value.episodeCount
     }
     this.crudApiService.guardarLista(i, personaje);
+    this.obtenerPersonaje();
   }
 }

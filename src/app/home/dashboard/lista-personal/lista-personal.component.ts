@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CrudApiSService } from 'src/app/services/crud-api-s.service';
 import { ModalApiComponent } from '../modal-api/modal-api.component';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map} from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-lista-personal',
   templateUrl: './lista-personal.component.html',
@@ -15,17 +15,17 @@ export class ListaPersonalComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'canonicalTitle', 'averageRating', 'episodeCount', 'editar', 'eliminar']; 
   dataSource = new MatTableDataSource<any>([]);  
-  info:any={};
-  listaunidad:any ={};
-  limit: any = 10;
+  limit: any = 5;
   offset: any = 0;
+  final: any = 5;
   total: any;
-  myCart$:Observable<any>;  
+  myCart$:Observable<any>;
+  myLP$:Observable<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;  
 
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
+  ngAfterViewInit() {    
+    this.dataSource.paginator = this.paginator;     
   }
 
   constructor(public crudApiService: CrudApiSService, public dialog: MatDialog) {} 
@@ -34,35 +34,36 @@ export class ListaPersonalComponent implements OnInit {
     this.obtenerPersonaje();
   }
 
-  obtenerPersonaje(){
-    this.myCart$= this.crudApiService.myCart$.pipe(map( (resp:any)=>{
+  obtenerPersonaje(){    
+    this.myCart$= this.crudApiService.myCart$.pipe(map( (resp:any)=>{                                     
+      this.total=resp.length;
+      this.dataSource= resp.slice(this.offset, this.final);
+      resp = this.dataSource;      
       const res: any= [];
       Object.keys(resp).forEach( key=>{
         const person: any= resp[key];
         person.idel = key;
         res.push(person);
-      })
-      return res;            
-    }));     
+      })                                          
+      return res;
+    }));        
   }
 
-  OnPageActivated(event:any){
-    this.limit=event.pageSize;
+  OnPageActivated(event:PageEvent){
+    this.crudApiService.paginarLista()        
     this.offset=(Number(event.pageIndex))* Number(event.pageSize);
-    console.log('limit',this.limit,'offset',this.offset);
-    this.crudApiService.datosApi(this.limit,this.offset).subscribe(resp=>{
-      this.dataSource=resp.data;
-      this.total=resp.meta.count;
-    })    
-  }
+    this.final= ((Number(event.pageIndex)+1)* Number(event.pageSize));      
+    this.obtenerPersonaje();         
+   }
 
   openDialog(idel:number) {
     this.dialog.open(ModalApiComponent); 
-    this.crudApiService.verlista(idel)      
+    this.crudApiService.verPersonaje(idel)      
   }
 
-  eliminarDeLalista(i:number){
+  eliminarDeLalista(i:number){        
     this.crudApiService.eliminarDeLista(i);
+    this.obtenerPersonaje();    
   }
 
 }

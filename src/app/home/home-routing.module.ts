@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 import { CrudApiDosComponent } from './dashboard/crud-api-dos/crud-api-dos.component';
 import { ListaPersonalComponent } from './dashboard/lista-personal/lista-personal.component';
 
@@ -8,7 +9,7 @@ import { HomeComponent } from './home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomeComponent, canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',

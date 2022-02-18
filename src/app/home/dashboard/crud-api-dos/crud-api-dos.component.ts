@@ -28,22 +28,15 @@ export class CrudApiDosComponent implements OnInit {
   constructor(public crudApiService: CrudApiSService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-     this.crudApiService.datosApi(this.limit, this.offset).subscribe(resp =>{      
-      //  console.log(resp);
+     this.crudApiService.datosApi(this.limit, this.offset).subscribe(resp =>{            
        this.dataSource=resp.data;
-       this.dataSource                 
-      //  console.log(this.dataSource);
-       this.total=resp.meta.count;
-      //  console.log(this.total);          
+       this.total=resp.meta.count;                
      })
   }
 
   OnPageActivated(event:any){
     this.limit=event.pageSize;
-    this.offset=(Number(event.pageIndex))* Number(event.pageSize);
-
-    console.log('limit',this.limit,'offset',this.offset);
-
+    this.offset=(Number(event.pageIndex))* Number(event.pageSize);    
     this.crudApiService.datosApi(this.limit,this.offset).subscribe(resp=>{
       this.dataSource=resp.data;
       this.total=resp.meta.count;
@@ -63,8 +56,7 @@ export class CrudApiDosComponent implements OnInit {
           averageRating:this.infoAlmacenada.data.attributes.averageRating,
           episodeCount:this.infoAlmacenada.data.attributes.episodeCount
         }
-        this.crudApiService.agregarALista(infoListaPersonal);
-        // console.log(infoListaPersonal);        
+        this.crudApiService.agregarALista(infoListaPersonal);        
       }else{
         alert("storage no es compatible en este navegador")
       }    

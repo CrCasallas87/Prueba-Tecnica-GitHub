@@ -19,21 +19,28 @@
     color: white;
     vertical-align: middle;
   }
-  
-  .header img {
-    height: 26px;
-    margin: 0 10px;
-  }
 
   .example-container {
     height: 700px;
-    overflow: auto;
+    overflow: auto;    
+  }
+
+  .mat-button{
+    background-color: rgb(179, 0, 0);
+    color:white;
   }
 
   table {
     width: 100%;
-  }
-  
+    .mat-header-cell{
+      background-color: rgb(179, 0, 0);
+      color:aliceblue;
+      font-weight: 700;
+    }
+    .mat-row:nth-child(odd){
+      background-color: darken($color: rgb(255, 255, 255), $amount: 10%);
+    } 
+  } 
 
   @media (max-width: 700px) {
     .header {
